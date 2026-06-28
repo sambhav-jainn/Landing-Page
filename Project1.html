@@ -1065,9 +1065,9 @@
         <div class="form-card">
           <div class="form-card-brand">New Jain Glass · Free Quote</div>
           <h2 class="form-card-title">Send Your Requirement</h2>
-          <p class="form-card-sub">No commitment. We respond within 2–4 hours.</p>
+          <p class="form-card-sub">No commitment. We respond within 24 hours.</p>
           <div id="cFormWrap">
-            <div class="fg"><label class="flabel">Your Name *</label><input class="finput" type="text" placeholder="e.g. Rajesh Kumar" id="cf-name"></div>
+            <div class="fg"><label class="flabel">Your Name *</label><input class="finput" type="text" placeholder="e.g. Sambhav Jain" id="cf-name"></div>
             <div class="fg"><label class="flabel">Phone Number *</label><input class="finput" type="tel" placeholder="+91 9319650593" id="cf-phone"></div>
             <div class="fg"><label class="flabel">Email Address</label><input class="finput" type="email" placeholder="your@email.com" id="cf-email"></div>
             <div class="fg">
@@ -1366,6 +1366,32 @@ document.addEventListener('DOMContentLoaded',()=>{
   renderTesti();
   renderFAQ();
 });
+</script>
+<script>
+async function submitContact() {
+
+    const data = {
+        full_name: document.getElementById("cf-name").value,
+        phone: document.getElementById("cf-phone").value,
+        glass_type: document.getElementById("cf-type").value,
+        details: document.getElementById("cf-details").value
+    };
+
+    const response = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+
+    if(result.success){
+        document.getElementById("cFormWrap").style.display = "none";
+        document.getElementById("cSuccess").style.display = "block";
+    }
+}
 </script>
 </body>
 </html>
